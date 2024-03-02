@@ -27,4 +27,4 @@ jobs:
 
       - name: Analyzing the code with pylint
         run: |
-          poetry run pylint spellchecker_llm/script.py
+          poetry run pylint --rcfile=.pylintrc spellchecker_llm/script.py

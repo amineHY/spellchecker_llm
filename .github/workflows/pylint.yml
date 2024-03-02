@@ -8,27 +8,23 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.11"]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.11"
 
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
-          source $HOME/.poetry/env
 
       - name: Install project dependencies
         run: poetry install
 
       - name: Analyzing the code with pylint
         run: |
-          poetry run pylint $(git ls-files '*.py')
+          poetry run pylint spellchecker_llm

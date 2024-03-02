@@ -5,21 +5,28 @@ Spellchecker using LLM
 import logging
 from string import Template
 import time
-
+import configparser
 from pynput import keyboard
 from pynput.keyboard import Key, Controller
 import pyperclip
 import requests
+
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 controller = Controller()
-OLLAMA_ENDPOINT = "http://localhost:11434/api/generate"
+# Load configuration
+config = configparser.ConfigParser()
+config.read("config.ini")
+
+OLLAMA_ENDPOINT = config["Ollama"]["endpoint"]
 OLLAMA_CONFIG = {
-    "model": "mistral:7b-instruct-v0.2-q4_K_S",
-    "stream": False,
+    "model": config["Ollama"]["model"],
+    "stream": config.getboolean(
+        "Ollama", "stream"
+    ),  # Convert string to boolean
 }
 PROMPT_TEMPLATE = Template(
     """Fix all typos, punctuation and casing in this text, but preserve all new line characters:
@@ -101,7 +108,7 @@ def on_f9():
 def main():
     """Main function."""
     logger.info("Spell Checker Running ...")
-    with keyboard.GlobalHotKeys({"<101>": on_f9}) as h:
+    with keyboard.GlobalHotKeys({config["Hotkeys"]["f9"]: on_f9}) as h:
         h.join()
 
 

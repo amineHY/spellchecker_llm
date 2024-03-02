@@ -101,7 +101,7 @@ def on_f9():
 def main():
     """Main function."""
     logger.info("Spell Checker Running ...")
-    with keyboard.GlobalHotKeys({"<f9>": on_f9}) as h:
+    with keyboard.GlobalHotKeys({"<101>": on_f9}) as h:
         h.join()
 
 

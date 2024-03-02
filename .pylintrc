@@ -1,0 +1,33 @@
+[MASTER]
+
+# Specify the maximum allowed line length
+max-line-length=100
+
+# Set the output format (e.g., text, colorized, JSON)
+output-format=text
+
+[MESSAGES CONTROL]
+
+# Ignore certain types of errors or warnings
+disable=
+    W1203   # Use lazy % formatting in logging functions
+
+[BASIC]
+
+# Specify additional builtins (comma-separated list)
+additional-builtins=
+
+[FORMAT]
+
+# Enable or disable various aspects of formatting
+...
+
+[TYPECHECK]
+
+# Enable or disable type checking
+...
+
+[REPORTS]
+
+# Configure reports (e.g., reports=no, reports=yes)
+...

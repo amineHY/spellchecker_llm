@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "spellchecker-llm"
+version = "0.1.0"
+description = ""
+authors = ["Amine Hadj-Youcef <hadjyoucef.amine@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pynput = "^1.7.6"
+pyperclip = "^1.8.2"
+requests = "^2.31.0"
+ollama = "^0.1.7"
+logging = "^0.4.9.6"
+pylint = "^3.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

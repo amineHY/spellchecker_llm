@@ -1,3 +1,7 @@
+"""
+Spellchecker using LLM
+"""
+
 import logging
 from string import Template
 import time

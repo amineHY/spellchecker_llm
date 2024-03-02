@@ -1,6 +1,9 @@
 name: Pylint
 
-on: [push]
+on:
+  push:
+    branches:
+      - main # Adjust this to match your branch name
 
 jobs:
   build:
@@ -8,8 +11,10 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.11"]
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
@@ -24,6 +29,6 @@ jobs:
       - name: Install project dependencies
         run: poetry install
 
-      - name: Analysing the code with pylint
+      - name: Analyzing the code with pylint
         run: |
           poetry run pylint $(git ls-files '*.py')

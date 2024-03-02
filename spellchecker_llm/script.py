@@ -1,7 +1,3 @@
-"""
-Spellchecker using LLM
-"""
-
 import logging
 from string import Template
 import time
@@ -35,7 +31,7 @@ def spellcheck_with_llm(text):
     """Spellcheck text using Ollama API."""
     logger.info("Fixing selected text using Ollama")
     prompt = PROMPT_TEMPLATE.substitute({"text": text})
-    logger.info(f"Prompt = {prompt}")
+    logger.info("Prompt = %s", prompt)
     try:
         response = requests.post(
             OLLAMA_ENDPOINT,
@@ -48,25 +44,22 @@ def spellcheck_with_llm(text):
         )
         response.raise_for_status()
         response_json = response.json()
-        logger.debug(f"Full response: {response_json}")
+        logger.debug("Full response: %s", response_json)
 
         # Check if the response is as expected
         if "response" in response_json:
             fixed_text = response_json["response"].strip('"')
         else:
             logger.error(
-                f"Unexpected response from Ollama API: {response_json}"
+                "Unexpected response from Ollama API: %s", response_json
             )
             return text
 
-        logger.debug(f"Response: {fixed_text}")
+        logger.debug("Response: %s", fixed_text)
         return fixed_text
 
     except requests.exceptions.RequestException as e:
-        logger.error(f"Error communicating with Ollama API: {e}")
-        logger.error(
-            f"Response content: {response.content}"
-        )  # Log the response content for debugging
+        logger.error("Error communicating with Ollama API: %s", e)
         return text
 
 
@@ -79,11 +72,11 @@ def fix_selected_text():
 
     # Get text from clipboard
     text = pyperclip.paste()
-    logger.debug(f"Original text: {text}")
+    logger.debug("Original text: %s", text)
 
     # Fix text with LLM
     fixed_text = spellcheck_with_llm(text)
-    logger.info(f"Fixed text: {fixed_text}")
+    logger.info("Fixed text: %s", fixed_text)
 
     # Copy fixed text back to clipboard
     pyperclip.copy(fixed_text)
@@ -101,16 +94,10 @@ def on_f9():
     fix_selected_text()
 
 
-def on_f10():
-    """Handle F10 keypress."""
-    logger.info("F10 key pressed")
-    fix_selected_text()
-
-
 def main():
     """Main function."""
     logger.info("Spell Checker Running ...")
-    with keyboard.GlobalHotKeys({"<101>": on_f9, "<109>": on_f10}) as h:
+    with keyboard.GlobalHotKeys({"<f9>": on_f9}) as h:
         h.join()
 
 

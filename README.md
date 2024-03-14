@@ -2,12 +2,21 @@
 
 - [Check Spelling of a selected text accros OS](#check-spelling-of-a-selected-text-accros-os)
   - [Install The Project](#install-the-project)
+  - [Export a requirements file](#export-a-requirements-file)
   - [Run the project](#run-the-project)
   - [Usage](#usage)
 
 ## Install The Project
 
     poetry install
+
+## Export a requirements file
+
+```
+poetry export --format=requirements.txt --output=requirements.txt --without-hashes
+```
+
+pyright spellchecker_llm/script.py
 
 ## Run the project
 

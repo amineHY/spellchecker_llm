@@ -13,6 +13,7 @@ requests = "^2.31.0"
 ollama = "^0.1.7"
 logging = "^0.4.9.6"
 pylint = "^3.1.0"
+pyright = "^1.1.352"
 
 
 [build-system]
